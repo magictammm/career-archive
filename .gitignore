@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+__pycache__/
+*.pyc
+
+# 编辑器
+.vscode/
+.idea/
+
+# 本地生成的档案与产物（含个人隐私，勿提交）
+我的档案/
+*档案/
+项目深挖/
+*.local.json
+archive.config.json
+*_v[0-9]*.html
+*.bak-*
+logs/

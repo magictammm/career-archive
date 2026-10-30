@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人职业档案白皮书 · 模板骨架</title>
+<style>
+
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --line:#e3e6ec; --ink:#1f2430;
+    --ink-2:#5b6472; --ink-3:#8b93a1; --brand:#2f5bea; --brand-soft:#eef2ff;
+    --warn:#c2410c; --warn-soft:#fff7ed; --ok:#0d7a5f; --ok-soft:#ecfdf5;
+    --purple:#7c3aed; --purple-soft:#f5f0ff;
+    --toc-w:224px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.68;font-size:14px;
+    display:grid;grid-template-columns:var(--toc-w) 1fr;
+  }
+
+  /* ============ 目录 ============ */
+  .toc{
+    position:sticky;top:0;height:100vh;overflow-y:auto;
+    background:#fff;border-right:1px solid var(--line);padding:22px 0 40px;
+  }
+  .toc-h{font-size:11px;letter-spacing:.16em;color:var(--ink-3);padding:0 20px 10px;font-weight:700}
+  .toc a{
+    display:block;padding:6px 20px;font-size:12.8px;color:var(--ink-2);
+    text-decoration:none;border-left:2px solid transparent;transition:.15s;
+  }
+  .toc a:hover{background:#f4f6fb;color:var(--brand)}
+  .toc a.sub{padding-left:34px;font-size:12.3px;color:var(--ink-3)}
+  .toc a.active{color:var(--brand);border-left-color:var(--brand);background:var(--brand-soft);font-weight:600}
+  .toc-div{height:1px;background:var(--line);margin:12px 20px}
+  .toc-f{font-size:11px;color:var(--ink-3);padding:14px 20px 0;line-height:1.7}
+
+  /* ============ 正文 ============ */
+  main{padding:44px 56px 120px;max-width:1080px}
+  header.cover{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:8px}
+  .kicker{font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:700;margin-bottom:10px}
+  h1{font-size:27px;margin:0 0 10px;letter-spacing:.4px;line-height:1.35}
+  .cover-meta{color:var(--ink-3);font-size:12.5px;line-height:1.9}
+  .cover-meta b{color:var(--ink-2);font-weight:600}
+
+  section{padding-top:34px}
+  h2{
+    font-size:18px;margin:0 0 14px;padding-left:11px;border-left:4px solid var(--brand);
+    display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  }
+  h2 .no{font-size:12px;color:var(--brand);font-weight:700;letter-spacing:.1em}
+  h3{font-size:15px;margin:26px 0 9px}
+  h4{font-size:13.5px;margin:18px 0 7px;color:var(--ink-2)}
+  p{margin:9px 0;color:var(--ink-2)}
+  ul{margin:8px 0;padding-left:20px;color:var(--ink-2)}
+  li{margin:4px 0}
+  strong{color:var(--ink)}
+  .sec-note{font-size:12.5px;color:var(--ink-3);margin:-6px 0 14px;padding-left:11px}
+
+  .lead{
+    background:var(--brand-soft);border:1px solid #cfd9ff;border-radius:10px;
+    padding:15px 19px;color:#22317a;font-size:13.4px;margin-top:16px;
+  }
+  .lead .lb{display:block;font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--brand);margin-bottom:5px}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.8px;margin:12px 0}
+  th{background:#f0f2f7;text-align:left;padding:9px 11px;font-weight:600;
+    border-bottom:1px solid var(--line);white-space:nowrap;font-size:12.2px;color:var(--ink)}
+  td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+  tr:last-child td{border-bottom:none}
+  td strong{color:var(--ink)}
+
+  .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;
+    background:var(--brand-soft);color:var(--brand);margin-right:4px;white-space:nowrap}
+  .tag.ok{background:var(--ok-soft);color:var(--ok)}
+  .tag.warn{background:var(--warn-soft);color:var(--warn)}
+  .tag.pu{background:var(--purple-soft);color:var(--purple)}
+  .tag.gray{background:#eef0f4;color:var(--ink-3)}
+
+  /* 概览卡 */
+  .kv{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:14px 0}
+  .kv .row{background:#fff;padding:11px 14px;display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:baseline}
+  .kv .row .k{font-size:12px;color:var(--ink-3);font-weight:600}
+  .kv .row .v{font-size:12.8px;color:var(--ink)}
+  .kv .row .v em{font-style:normal;color:var(--ink-3)}
+
+  /* 阶段条 */
+  .strip{display:flex;flex-wrap:wrap;margin:16px 0 6px}
+  .seg{flex:1 1 auto;min-width:150px;padding:10px 14px;background:#fff;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  .seg:first-child{border-left:1px solid var(--line);border-radius:10px 0 0 10px}
+  .seg:last-child{border-radius:0 10px 10px 0}
+  .seg .yr{font-size:11px;color:var(--ink-3);letter-spacing:.3px}
+  .seg .nm{font-size:13.3px;font-weight:600;margin:3px 0 4px}
+  .seg .rl{font-size:12px;color:var(--ink-2)}
+
+  /* STAR */
+  .stage{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 20px;margin:14px 0}
+  .stage h3{margin:0 0 12px;font-size:14.8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .stage h3 .badge{font-size:11.5px;font-weight:600;color:#fff;background:var(--brand);
+    border-radius:20px;padding:2px 10px;letter-spacing:.3px}
+  .stage.p3 h3 .badge{background:var(--ok)}
+  .stage.p4 h3 .badge{background:var(--purple)}
+  .star{display:grid;grid-template-columns:58px 1fr;gap:10px 14px;align-items:start}
+  .star .k{font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);
+    border-radius:6px;text-align:center;padding:3px 0;margin-top:2px}
+  .star .k.r{color:var(--ok);background:var(--ok-soft)}
+  .star .v{font-size:12.8px;color:var(--ink-2)}
+  .star .v ul{margin:4px 0 0;padding-left:18px}
+  .star .v li{margin:3px 0}
+
+  /* 亮点卡 */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+  .hcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+  .hcard .n{font-size:11.5px;color:var(--brand);font-weight:700}
+  .hcard .t{font-size:13.2px;color:var(--ink);margin:3px 0 4px;font-weight:600;line-height:1.5}
+  .hcard .d{font-size:12.2px;color:var(--ink-2)}
+
+  /* 折叠深度区 */
+  details.deep{margin:18px 0 0;border:1px solid var(--line);border-radius:12px;
+    background:#fbfcfe;overflow:hidden}
+  details.deep > summary{
+    cursor:pointer;list-style:none;padding:13px 18px;font-size:13.5px;font-weight:600;color:var(--brand);
+    background:#f2f5fd;display:flex;align-items:center;gap:9px;user-select:none;
+  }
+  details.deep > summary::-webkit-details-marker{display:none}
+  details.deep > summary::before{
+    content:"";width:0;height:0;border-left:6px solid var(--brand);
+    border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;transition:.18s;
+  }
+  details.deep[open] > summary::before{transform:rotate(90deg)}
+  details.deep > summary .cnt{font-size:11.5px;font-weight:500;color:var(--ink-3);margin-left:auto}
+  .deep-body{padding:6px 18px 20px}
+
+  /* 占位 */
+  .todo{background:#fff;border:1px dashed #c8cfdb;border-radius:12px;padding:20px 22px;margin:14px 0}
+  .todo .th{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px;display:flex;gap:8px;align-items:center}
+  .todo .td{font-size:12.5px;color:var(--ink-3)}
+  .todo ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
+
+  /* 段头 */
+  .ten-head{
+    background:linear-gradient(180deg,#fff,#fbfcff);border:1px solid var(--line);
+    border-left:4px solid var(--brand);border-radius:10px;padding:15px 19px;margin:26px 0 4px;
+  }
+  .ten-head .tt{font-size:16px;font-weight:700;color:var(--ink);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .ten-head .tt .id{font-size:11.5px;color:var(--brand);font-weight:700;letter-spacing:.08em}
+  .ten-head .sub{font-size:12.5px;color:var(--ink-3);margin-top:5px}
+  .ten-head .line{font-size:13px;color:var(--ink-2);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+
+  /* 优势分析 */
+  .diff{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+  .dcard{background:#fff;border:1px solid var(--line);border-top:3px solid var(--brand);
+    border-radius:10px;padding:14px 16px}
+  .dcard .dt{font-size:13.3px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .dcard .dd{font-size:12.3px;color:var(--ink-2)}
+
+  .scope-warn{background:var(--warn-soft);border:1px solid #f6d5b8;color:#8a3d10;
+    border-radius:8px;padding:12px 16px;font-size:12.6px;margin-top:14px}
+  .scope-warn b{color:#7a3410}
+
+
+  /* ====== 项目时间线甘特（v0.2 新增）====== */
+  .gantt-card{margin:18px 0 6px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+  .gantt-head{padding:14px 18px 10px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbfcfe,#fff)}
+  .gantt-head .gt{font-size:13.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .gantt-head .gtip{font-size:11px;font-weight:500;color:#1B5FA8;background:rgba(46,134,222,.11);
+    border:1px solid rgba(46,134,222,.28);border-radius:20px;padding:1px 9px}
+  .gantt-head .gnote{font-size:11.8px;color:var(--ink-3);margin-top:5px;line-height:1.6}
+  .gantt-scroll{overflow-x:auto;overflow-y:hidden;padding:8px 12px 4px}
+  .gantt{position:relative}
+  .g-col{position:absolute;top:40px;bottom:34px;background:rgba(47,91,234,.022)}
+  .g-sep{position:absolute;top:40px;bottom:34px;width:1px;background:var(--line)}
+  .g-year{position:absolute;top:8px;text-align:center;font-size:11.5px;font-weight:700;color:var(--ink-2)}
+  .g-year small{display:block;font-size:10px;font-weight:400;color:var(--ink-3);margin-top:1px}
+  .g-now{position:absolute;top:40px;bottom:34px;width:2px;background:#c9d2e2}
+  .g-lane{position:absolute;left:0;right:0;height:64px}
+  .g-lane::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#f0f2f7}
+  .g-lanelab{position:absolute;left:0;top:8px;width:92px;text-align:right;padding-right:10px;line-height:1.4}
+  .g-lanelab b{display:block;font-size:11.5px;color:var(--ink);font-weight:700}
+  .g-lanelab span{display:block;font-size:10px;color:var(--ink-3)}
+  .g-bar{position:absolute;top:9px;height:46px;border-radius:8px;background:#fff;
+    border:1px solid var(--line);border-left:4px solid #4E79A7;padding:6px 10px;
+    display:flex;flex-direction:column;justify-content:center;gap:2px;overflow:hidden;z-index:4;
+    box-shadow:0 1px 4px rgba(31,39,51,.06)}
+  .g-bar.main{box-shadow:0 0 0 1.5px #EBC77E,0 2px 10px rgba(224,145,58,.18)}
+  .g-bar .gnm{font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    display:flex;align-items:center;gap:5px}
+  .g-bar .gpill{position:absolute;right:8px;top:6px;font-size:9.5px;font-weight:600;border-radius:4px;padding:0 5px;line-height:15px}
+  .g-bar .gpill.aos{color:#1B5FA8;background:rgba(46,134,222,.13);border:1px solid rgba(46,134,222,.3)}
+  .g-bar .gpill.lin{color:#2E7D4F;background:rgba(79,157,91,.13);border:1px solid rgba(79,157,91,.3)}
+  .g-bar .gpill.pre{color:#8A6A2F;background:rgba(224,145,58,.15);border:1px solid rgba(224,145,58,.36)}
+  .g-bar .gdate{font-size:10px;color:var(--ink-3);white-space:nowrap}
+  .g-bar.clickable{cursor:pointer;transition:transform .12s,box-shadow .12s}
+  .g-bar.clickable:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(31,39,51,.16);z-index:9}
+  .g-bar.clickable::after{content:"查看深挖 →";position:absolute;right:6px;bottom:4px;font-size:9.5px;font-weight:600;
+    color:#1B5FA8;background:rgba(255,255,255,.95);border:1px solid rgba(46,134,222,.3);
+    border-radius:8px;padding:0 6px;opacity:0;transition:opacity .15s}
+  .g-bar.clickable:hover::after{opacity:1}
+  .g-bar.nodoc{cursor:default;background:#fcfcfd}
+  .g-bar.nodoc .gnm{color:var(--ink-2)}
+  .g-bar.nodoc::after{content:"暂无文档";position:absolute;right:6px;bottom:4px;font-size:9.5px;
+    font-weight:600;color:#8A6A2F;background:rgba(224,145,58,.12);
+    border:1px solid rgba(224,145,58,.34);border-radius:8px;padding:0 6px}
+  .g-bar.ph{cursor:default;background:repeating-linear-gradient(135deg,#fbf7ef,#fbf7ef 8px,#f6efe2 8px,#f6efe2 16px);
+    border:1px dashed #D8B87E;border-left:4px dashed #D8B87E;box-shadow:none}
+  .g-bar.ph .gnm{color:#8A6A2F;font-weight:600;font-size:12px;white-space:normal;line-height:1.35}
+  .g-bar.ph .gdate{color:#A9855A}
+  .gantt-head .gtip.warn{color:#8A6A2F;background:rgba(224,145,58,.12);border-color:rgba(224,145,58,.36)}
+  .gstar{display:inline-block;width:11px;height:11px;background:#F0A92E;flex:0 0 auto;
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+  .y23{border-left-color:#4E79A7} .y24{border-left-color:#4F9D5B}
+  .y25{border-left-color:#E0913A} .y26{border-left-color:#9B6BB0}
+  .y20{border-left-color:#4E79A7}
+  .gdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+  .gdot.y23{background:#4E79A7} .gdot.y24{background:#4F9D5B}
+  .gdot.y25{background:#E0913A} .gdot.y26{background:#9B6BB0}
+  .g-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:9px 18px 12px;
+    border-top:1px dashed var(--line);font-size:11px;color:var(--ink-3)}
+  .g-foot span{display:inline-flex;align-items:center;gap:4px}
+  .g-foot .gsep{color:#dfe3ea}
+  .g-foot .gwarn{color:#B8802F}
+
+  /* ====== 项目弹层（v0.2 新增）====== */
+  #mask{position:fixed;inset:0;background:rgba(20,26,34,.55);backdrop-filter:blur(3px);
+    z-index:900;display:none;padding:38px 24px;overflow:auto}
+  #mask.on{display:block;animation:fadein .16s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  #mask.on #panel{animation:popin .2s ease}
+  @keyframes popin{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+  #panel{position:relative;max-width:940px;margin:0 auto;background:#fff;border-radius:14px;
+    box-shadow:0 18px 60px rgba(0,0,0,.30);overflow:hidden}
+  #phead{position:sticky;top:0;background:#fff;padding:11px 26px 10px;border-bottom:1px solid var(--line);z-index:5}
+  #ptitle{font-size:13.5px;font-weight:700;letter-spacing:.3px;line-height:1.5;padding-right:96px;color:var(--ink-2)}
+  #pmeta{margin-top:2px;font-size:11px;color:var(--ink-3);line-height:1.55;padding-right:96px}
+  #pclose{position:absolute;top:9px;right:16px;width:34px;height:34px;border-radius:8px;
+    border:1px solid var(--line);background:#fff;font-size:17px;color:var(--ink-2);cursor:pointer;line-height:1}
+  #pclose:hover{background:#f4f6f9;color:var(--ink)}
+  #pbody{padding:20px 26px 36px;font-size:13.2px;line-height:1.78;color:var(--ink-2);max-height:72vh;overflow:auto}
+  .md-h1{font-size:16.5px;color:var(--ink);margin:2px 0 12px;font-weight:700}
+  .md-h2{font-size:14.8px;color:var(--ink);margin:22px 0 9px;font-weight:700;padding-left:9px;border-left:3px solid var(--brand)}
+  .md-h3{font-size:13.4px;color:#33567B;margin:16px 0 7px;font-weight:700}
+  .md-h4{font-size:12.6px;color:var(--ink-2);margin:13px 0 5px;font-weight:700}
+  .md-p{margin:7px 0}
+  .md-quote{margin:10px 0;padding:9px 13px;background:#f6f8fb;border-left:3px solid var(--line);
+    border-radius:0 7px 7px 0;font-size:12.4px;line-height:1.72}
+  .md-tbl{width:100%;border-collapse:collapse;margin:11px 0;font-size:12px;line-height:1.55}
+  .md-tbl th{background:#f6f8fb;color:var(--ink);font-weight:700;text-align:left;padding:6px 9px;border:1px solid var(--line)}
+  .md-tbl td{padding:6px 9px;border:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+  .md-tbl tr:nth-child(even) td{background:#fcfdfe}
+  .md-list{margin:7px 0;padding-left:19px}
+  .md-li{margin:4px 0}
+  .md-hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+  .md-pre{background:#f6f8fb;padding:10px 12px;border-radius:7px;font-size:12px;overflow:auto}
+  #pbody code{font-family:ui-monospace,Menlo,monospace;font-size:11.8px;background:#f1f4f8;
+    border-radius:3px;padding:1px 4px;color:#8B3A1E}
+  #pbody strong{color:var(--ink)}
+  @media (max-width:900px){ #panel{max-width:100%} #mask{padding:14px 8px} }
+  @media print{ .gantt-scroll{overflow:visible} #mask{display:none !important} }
+
+  /* 版本切换胶囊 */
+  .scopebar{
+    position:fixed;right:22px;bottom:22px;z-index:50;background:#fff;
+    border:1px solid var(--line);border-radius:14px;padding:11px 13px;
+    box-shadow:0 8px 28px rgba(20,30,60,.14);display:flex;flex-direction:column;gap:8px;min-width:216px;
+  }
+  .scopebar .sbt{font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);font-weight:700}
+  .sw{display:flex;background:#f0f2f7;border-radius:9px;padding:3px;gap:3px}
+  .sw button{
+    flex:1;border:0;background:transparent;font-size:12px;padding:6px 4px;border-radius:7px;
+    cursor:pointer;color:var(--ink-2);font-family:inherit;font-weight:600;transition:.15s;white-space:nowrap;
+  }
+  .sw button.on{background:#fff;color:var(--brand);box-shadow:0 1px 3px rgba(20,30,60,.12)}
+  .sbh{font-size:11px;color:var(--ink-3);line-height:1.55}
+
+  /* 内外版本控制 */
+  [data-scope="external"] .only-int{display:none !important}
+  [data-scope="internal"] .only-ext{display:none !important}
+  .int-mark{border-bottom:1px dashed #e9b58a;cursor:help}
+
+  footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--ink-3);line-height:1.9}
+
+  @media (max-width:900px){
+    body{grid-template-columns:1fr}
+    .toc{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+    main{padding:28px 20px 90px}
+    .kv,.cards,.diff{grid-template-columns:1fr}
+    .scopebar{right:12px;bottom:12px;left:12px;min-width:0}
+  }
+  @media print{
+    body{display:block;background:#fff}
+    .toc,.scopebar{display:none !important}
+    main{padding:0;max-width:none}
+    details.deep{border:0;background:#fff}
+    details.deep > summary{display:none}
+    details.deep > .deep-body{padding:0}
+    section{page-break-inside:avoid}
+    .stage,.hcard,.kv,table{page-break-inside:avoid}
+  }
+
+/* ============ v0.5 翻书版 ============ */
+body{display:block!important;grid-template-columns:none!important;background:#EDE9DF;
+  overflow:hidden;height:100vh;margin:0}
+:root{--paper:#FBF9F4;--accent:#2F5BEA;--gold:#B08430}
+.page{position:absolute;inset:0;overflow-y:auto;display:none;background:var(--paper);
+  max-width:1280px;margin:0 auto;box-shadow:0 0 40px rgba(31,39,51,.10);padding:56px 64px 96px}
+.page.active{display:block;animation:pgin .28s ease}
+@keyframes pgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page#cover{display:none;overflow:hidden;position:absolute}
+.page#cover.active{display:flex;align-items:center;justify-content:center}
+
+/* 封面 */
+.cover-frame{border:1.5px solid var(--gold);outline:1px solid var(--gold);outline-offset:6px;
+  padding:64px 56px;text-align:center;max-width:600px;width:100%;background:var(--paper)}
+.cover-kicker{font-size:11px;letter-spacing:5px;color:#8896A8;font-weight:600;margin-bottom:26px}
+.cover-title{font-family:"Noto Serif SC","Songti SC","STSong",serif;font-size:40px;font-weight:900;
+  letter-spacing:6px;color:#1F2733;line-height:1.35}
+.cover-sub{margin-top:18px;font-size:14px;color:#4A5568;letter-spacing:2px}
+.cover-meta{margin-top:44px;font-size:12px;color:#8896A8;line-height:2}
+.cover-orn{margin:26px auto;width:52px;border-top:1.5px solid var(--gold)}
+
+/* 目录 + 时间线 */
+.toc-head{font-family:"Noto Serif SC","Songti SC",serif;font-size:26px;font-weight:900;letter-spacing:8px;
+  text-align:center;margin-bottom:8px}
+.toc-sub{text-align:center;font-size:12px;color:#8896A8;margin-bottom:32px;letter-spacing:2px}
+.toc-row{display:flex;align-items:baseline;padding:8px 4px;color:#1F2733;text-decoration:none;font-size:14px;cursor:pointer}
+.toc-row:hover .ttitle{color:var(--accent)}
+.tno{width:80px;font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;color:var(--gold);font-size:13px;flex-shrink:0}
+.ttitle{font-weight:600}
+.dots{flex:1;border-bottom:1px dotted #B8B2A4;margin:0 12px;transform:translateY(-3px)}
+.tpage{font-size:11.5px;color:#8896A8;flex-shrink:0}
+
+.tl{position:relative;margin:24px 0 8px;padding-left:26px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:#DDD6C6}
+.tl-node{position:relative;padding:0 0 26px 18px}
+.tl-dot{position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;
+  background:var(--paper);border:3px solid var(--accent)}
+.tl-node.edu .tl-dot{border-color:var(--gold)}
+.tl-node.gap .tl-dot{border-color:#C77B3F}
+.tl-node.now .tl-dot{border-color:#4F9D5B;background:#4F9D5B}
+.tl-time{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:4px}
+.tl-node.edu .tl-time{color:var(--gold)}
+.tl-node.gap .tl-time{color:#C77B3F}
+.tl-body{font-size:13.5px;color:#4A5568;line-height:1.75}
+.tl-body b{color:#1F2733}
+
+/* 章节 */
+.ch-head{margin-bottom:26px}
+.ch-num{font-family:"Noto Serif SC","Songti SC",serif;font-size:14px;font-weight:700;color:var(--gold);
+  letter-spacing:6px;margin-bottom:8px}
+.ch-title{font-family:"Noto Serif SC","Songti SC",serif;font-size:26px;font-weight:900;color:#1F2733;
+  letter-spacing:2px;line-height:1.4}
+.ch-rule{margin-top:16px;border-top:2px solid #1F2733;width:56px}
+h3{font-family:"Noto Serif SC","Songti SC",serif}
+
+/* v0.3 章节内容样式桥接 */
+.section{background:transparent;border:none;border-radius:0;padding:0;margin:0 0 26px}
+.section h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:17px;font-weight:800;margin:18px 0 12px;
+  padding-bottom:8px;border-bottom:1px solid #DDD6C6}
+.section p,.section li{color:#4A5568;font-size:13.5px;line-height:1.8}
+.section th{background:#F1EDE2;border-color:#DDD6C6;padding:7px 10px;font-size:12.5px;text-align:left}
+.section td{border-color:#DDD6C6;padding:7px 10px;font-size:12.5px}
+.section table{border-collapse:collapse;width:100%;margin:8px 0 16px}
+.section ul{padding-left:22px}
+.page-h1,.page-sub{display:none}
+.wrap{max-width:none;margin:0;padding:0}
+
+/* 内外档切换（仅作用于经历章与 gap 章） */
+.scope-pill{position:fixed;top:14px;right:18px;z-index:9999;display:inline-flex;
+  border:1px solid #DDD6C6;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.92);backdrop-filter:blur(6px)}
+.scope-pill button{border:0;padding:5px 14px;font-size:11.5px;font-weight:600;cursor:pointer;
+  background:transparent;color:#8896A8;transition:.15s}
+.scope-pill button.on{background:#2F5BEA;color:#fff}
+.scope-pill button:first-child.on{background:var(--gold);color:#fff}
+body.public .only-int{display:none!important}
+body:not(.public) .only-ext{display:none!important}
+body.public .only-ext{display:block!important}
+body.public span.only-ext{display:inline!important}
+
+/* 左侧悬挂目录（书脊式） */
+.side-toc{position:fixed;left:0;top:0;bottom:0;width:172px;z-index:9990;
+  background:#F5F1E6;border-right:1px solid #DDD6C6;padding:22px 0 96px;overflow-y:auto}
+.side-cap{font-family:"Noto Serif SC","Songti SC",serif;font-size:13px;font-weight:900;color:var(--gold);
+  letter-spacing:6px;padding:0 18px 14px;border-bottom:1px solid #DDD6C6;margin-bottom:10px}
+.side-item{padding:8px 14px 8px 18px;font-size:12.5px;color:#4A5568;cursor:pointer;
+  border-left:3px solid transparent;line-height:1.4}
+.side-item:hover{background:#EDE7D6;color:#1F2733}
+.side-item.on{border-left-color:var(--accent);color:var(--accent);font-weight:700;background:#EAE4D2}
+.side-item .sno{display:block;font-size:9.5px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:2px}
+.g-bar{cursor:pointer}
+.g-bar:hover{filter:brightness(1.10);box-shadow:0 0 0 2px rgba(47,91,234,.45)}
+.clickable-row{cursor:pointer}
+.clickable-row:hover td{background:#F1EDE2}
+@media (min-width:1181px){ .page{left:172px} }
+@media (max-width:1180px){ .side-toc{display:none} }
+
+/* 底部翻页栏 */
+.fixed-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:9998;
+  display:flex;align-items:center;gap:10px;background:rgba(31,39,51,.92);backdrop-filter:blur(6px);
+  border-radius:24px;padding:8px 18px;box-shadow:0 4px 18px rgba(31,39,51,.30);color:#fff}
+.fixed-bar .nav{border:0;background:transparent;color:#fff;font-size:12px;cursor:pointer;
+  max-width:230px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 6px;border-radius:8px}
+.fixed-bar .nav:hover{background:rgba(255,255,255,.14)}
+.fixed-bar .nav:disabled{opacity:.35;cursor:default}
+.fixed-bar .pno{font-size:12px;font-weight:700;letter-spacing:1px;min-width:64px;text-align:center;
+  color:#E8D9B0;cursor:pointer}
+
+@media (max-width:760px){
+  .page{padding:40px 20px 90px}
+  .cover-frame{padding:44px 22px}
+  .tpage{display:none}
+  .fixed-bar .nav{max-width:90px}
+}
+@media print{
+  body{overflow:visible;height:auto;background:#fff}
+  .page{display:block!important;position:static!important;overflow:visible!important;height:auto!important;
+    box-shadow:none;max-width:none;margin:0;padding:24px 0;page-break-after:always;animation:none}
+  .scope-pill,.fixed-bar{display:none!important}
+  .side-toc{display:none!important}
+}
+</style>
+</head>
+<body class="">
+<nav class="side-toc" aria-label="章节目录">
+<div class="side-cap">白皮书</div>
+<div class="side-item" data-pi="0" onclick="go(0)">封面</div>
+<div class="side-item" data-pi="1" onclick="go(1)"><span class="sno">CONTENTS</span>目录 · 总览</div>
+<div class="side-item" data-pi="2" onclick="go(2)"><span class="sno">第四章</span>示例公司</div>
+<div class="side-item" data-pi="3" onclick="go(3)"><span class="sno">第五章</span>曲线与薪资</div>
+<div class="side-item" data-pi="4" onclick="go(4)">全书完</div>
+</nav>
+<div class="scope-pill">
+  <button id="btn-int" onclick="setScope('int')">内部档</button>
+  <button id="btn-ext" onclick="setScope('public')">对外档</button>
+</div>
+
+<!-- ==================== 封面 ==================== -->
+<div class="page" id="cover" data-title="封面">
+  <div class="cover-frame">
+    <div class="cover-kicker">PERSONAL CAREER DOSSIER</div>
+    <div class="cover-title">个人职业档案<br>白皮书</div>
+    <div class="cover-orn"></div>
+    <div class="cover-sub">某某 · 岗位标签（例：智能硬件 / 软件产品经理）</div>
+    <div class="cover-meta">
+      V1.0 ｜ 2026 年 10 月<br>
+      内部档 / 对外档 · 右上角切换<br>
+      <span style="opacity:.7">← → 方向键翻页</span>
+    </div>
+  </div></div>
+
+<!-- ==================== 目录 · 总览 ==================== -->
+<div class="page" id="toc" data-title="目录 · 总览">
+  <div class="toc-head">目 录</div>
+  <div class="toc-sub">CONTENTS ｜ 竖排时间线即全书总览</div>
+  <div class="tl">
+    <div class="tl-node"><div class="tl-dot"></div><div class="tl-time">2020.03 – 2021.03</div>
+      <div class="tl-body"><b>XX 科技</b>（示例）｜ 岗位名<br>一句话说清这段的主线产出</div></div>
+    <div class="tl-node"><div class="tl-dot"></div><div class="tl-time">2021.03 – 2022.07</div>
+      <div class="tl-body"><b><span class="only-int">YY 有限公司（派驻 · 某供应商）</span><span class="only-ext">YY 有限公司</span></b>｜ 岗位名<br>一句话说清这段的主线产出</div></div>
+    <div class="tl-node"><div class="tl-dot"></div><div class="tl-time">2022.07 – 至今</div>
+      <div class="tl-body"><b>ZZ 科技</b>｜ 岗位名<br>一句话说清这段的主线产出</div></div>
+  </div>
+  <div style="margin-top:24px">
+    <a class="toc-row" href="#ch-exp"><span class="tno">第四章</span><span class="ttitle">示例公司（2023 – 2026）· 一句话业务定位</span><span class="dots"></span><span class="tpage">项目 N 项</span></a>
+    <a class="toc-row" href="#ch-curve"><span class="tno">第五章</span><span class="ttitle">职业发展曲线与薪资</span><span class="dots"></span><span class="tpage">5 维走势 · 薪资趋势</span></a>
+  </div>
+</div>
+
+<!-- ==================== 经历章骨架（复制这一整块即可加一段经历） ==================== -->
+<div class="page" id="ch-exp" data-title="第四章 示例公司（2023 – 2026）· 一句话业务定位">
+  <div class="ch-head">
+    <div class="ch-no">CHAPTER 04</div>
+    <div class="ch-title">示例公司（2023 – 2026）· 一句话业务定位</div>
+    <div class="ch-rule"></div>
+  </div>
+
+  <div class="ten-head" id="t-exp">
+    <div class="tt"><span class="id">EXP-01</span><span class="only-int">示例公司（真实主体 · 派驻说明）</span><span class="only-ext">示例公司</span></div>
+    <div class="sub">2023.09 – 2026.08（35 个月）｜ 岗位名 ｜ 某项目组</div>
+    <div class="line">主线：一句话说清这段最值钱的能力是什么，后面用项目证明它。</div>
+  </div>
+
+  <div class="gantt-card">
+    <div class="gantt-head">
+      <div class="gt">项目时间线<span class="gtip">点击任一条 → 打开该项目的完整深挖文档</span></div>
+      <div class="gnote">纵轴＝按岗位族选的分层依据（如价格带 / 模块 / 需求类型），横轴＝时间。</div>
+    </div>
+    <div class="gantt-scroll"><div class="gantt" style="width:1120px;height:230px">
+      <div class="g-col" style="left:100.0px;width:333.3px"></div>
+      <div class="g-sep" style="left:100.0px"></div>
+      <div class="g-year" style="left:100.0px;width:333.3px">2023<small>09–12</small></div>
+      <div class="g-col" style="left:433.3px;width:333.3px"></div>
+      <div class="g-sep" style="left:433.3px"></div>
+      <div class="g-year" style="left:433.3px;width:333.3px">2024<small>全年</small></div>
+      <div class="g-col" style="left:766.7px;width:253.3px"></div>
+      <div class="g-sep" style="left:766.7px"></div>
+      <div class="g-year" style="left:766.7px;width:253.3px">2025<small>全年</small></div>
+
+      <div class="g-lane" style="top:56px">
+        <div class="g-lanelab"><b>第一层</b><span>如：旗舰带</span></div>
+        <div class="g-bar main clickable" data-key="P01" style="left:100.0px;width:500.0px" title="示例项目 A" onclick="openDoc('P01')">
+          <span class="gnm">示例项目 A<i class="gstar"></i></span>
+          <span class="gpill aos">标签</span>
+          <span class="gdate">23.09–25.03</span>
+        </div>
+      </div>
+
+      <div class="g-lane" style="top:124px">
+        <div class="g-lanelab"><b>第二层</b><span>如：入门带</span></div>
+        <div class="g-bar clickable" data-key="P02" style="left:433.3px;width:333.3px" title="示例项目 B" onclick="openDoc('P02')">
+          <span class="gnm">示例项目 B</span>
+          <span class="gpill lin">标签</span>
+          <span class="gdate">24.07–25.03</span>
+        </div>
+      </div>
+    </div></div>
+    <div class="g-foot">
+      <span>金色描边 + <i class="gstar"></i> ＝ 我主责</span><span class="gsep">|</span><span>条长为「我实际参与的区间」，非产品立项到上市周期</span>
+    </div>
+  </div>
+
+  <div class="kv">
+    <div class="row only-int"><span class="k">雇主主体</span><span class="v">真实签约方（外包供应商等）· 派驻 甲方公司</span></div>
+    <div class="row only-ext"><span class="k">雇主主体</span><span class="v">甲方公司全称</span></div>
+    <div class="row"><span class="k">岗位</span><span class="v">岗位名（对内职级 / 对外岗位名）</span></div>
+    <div class="row"><span class="k">在职</span><span class="v">2023.09 – 2026.08（35 个月）</span></div>
+    <div class="row only-int"><span class="k">薪酬</span><span class="v">20,000 → 25,200（内部档才显示）</span></div>
+    <div class="row only-int"><span class="k">离职原因</span><span class="v">待补 / 或写真实原因</span></div>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <h2>项目一览（点击行打开深挖文档）</h2>
+    <table>
+      <thead><tr><th>周期</th><th>项目</th><th>平台 / 形态</th><th>我的角色</th><th>阶段与结果</th></tr></thead>
+      <tbody>
+        <tr class="clickable-row" data-key="P01" title="点击打开深挖文档" onclick="openDoc('P01')"><td>2023.09–2025.03</td><td><strong>示例项目 A</strong></td><td>平台</td><td>主责</td><td>一句量化结果</td></tr>
+        <tr class="clickable-row" data-key="P02" title="点击打开深挖文档" onclick="openDoc('P02')"><td>2024.07–2025.03</td><td><strong>示例项目 B</strong></td><td>形态</td><td>参与</td><td>一句量化结果</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" style="margin-top:22px">
+    <h2>分阶段深度复盘</h2>
+    <p><b>2023（入场）</b>：接手什么、发现什么问题、第一个月做了什么。</p>
+    <p><b>2024（主战）</b>：主责项目的关键决策与卡点，用 STAR 写。</p>
+    <p><b>2025–2026（收口）</b>：结果、沉淀、带人与交接。</p>
+    <blockquote class="md-quote">口径提醒：哪个说法对外要收着讲、哪个数字不能吹，写在这里提醒自己。</blockquote>
+  </div>
+</div>
+
+<!-- ==================== 曲线与薪资 ==================== -->
+<div class="page" id="ch-curve" data-title="第五章 职业发展曲线与薪资">
+  <div class="ch-head">
+    <div class="ch-no">CHAPTER 05</div>
+    <div class="ch-title">职业发展曲线与薪资</div>
+    <div class="ch-rule"></div>
+  </div>
+
+  <div class="section">
+    <h2>职业发展曲线（5 维度 × 每段经历）</h2>
+    <table>
+      <thead><tr><th>维度</th><th>第一段</th><th>第二段</th><th>第三段</th></tr></thead>
+      <tbody>
+        <tr><td>职级</td><td>助理级</td><td>专员级</td><td>组长级</td></tr>
+        <tr><td>职责范围</td><td>模块级</td><td>多模块</td><td>产品线级</td></tr>
+        <tr><td>业务复杂度</td><td>单一软件</td><td>大型系统</td><td>软硬 + 跨平台</td></tr>
+        <tr><td>团队规模</td><td>项目组 N 人 / 直属 0</td><td>待补</td><td>带 N 人 + 跨部门 N+</td></tr>
+        <tr><td>影响力</td><td>模块上线</td><td>多模块交付</td><td>架构定义 + 带人</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>薪资趋势 <span class="tag int only-int">内部</span></h2>
+    <table class="only-int">
+      <thead><tr><th>时段</th><th>公司</th><th>月薪</th><th>变动</th></tr></thead>
+      <tbody>
+        <tr><td>2020.03–2021.03</td><td>第一段</td><td>8,500</td><td>—</td></tr>
+        <tr><td>2021.03–2022.07</td><td>第二段</td><td>12,000</td><td>+41%</td></tr>
+        <tr><td>2022.07–2023.08</td><td>第三段</td><td>17,000</td><td>+42%</td></tr>
+      </tbody>
+    </table>
+    <p class="only-ext" style="color:var(--ink-3);font-style:italic">薪资数据仅在内部档显示。</p>
+  </div>
+</div>
+
+<!-- ==================== 全书完 ==================== -->
+<div class="page" id="end" data-title="全书完">
+  <div style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:900;letter-spacing:6px;text-align:center;padding:120px 0 40px">— 全书完 —</div>
+  <div style="text-align:center;font-size:12px;color:#8896A8">个人职业档案白皮书 V1.0 · 2026 年 10 月</div></div>
+
+<!-- ==================== 项目深挖弹层（勿删，删了点击失效） ==================== -->
+<div id="mask">
+  <div id="panel">
+    <div id="phead">
+      <div id="ptitle">项目深挖</div>
+      <div id="pmeta"></div>
+      <button id="pclose" title="关闭">×</button>
+    </div>
+    <div id="pbody"></div>
+  </div>
+</div>
+
+<div class="fixed-bar">
+  <button class="nav" id="pt-prev" onclick="go(cur-1)">—</button>
+  <div class="pno" id="pageno" onclick="go(1)" title="回到目录">1 / 5</div>
+  <button class="nav" id="pt-next" onclick="go(cur+1)">—</button>
+</div>
+
+<script id="docdata" type="application/json">{"P01":{"t":"项目深挖 01 ｜ 示例项目 A（占位，示范渲染效果）","m":"主责 · 示例角色","md":"# 项目深挖 01 ｜ 示例项目 A\n\n> 归属：XX 科技有限公司 · 某事业部 · 某产品线\n> 我的参与周期：2023.03 – 2024.06\n> 我的角色：主责（示例）\n> 来源：立项书 / 周报 / 版本记录（换成你自己的信源）\n\n---\n\n## 一、项目背景\n\n为什么做这个项目：市场 / 用户 / 竞争 / 内部动因，**带数据**。\n\n- 市场侧：示例——同类产品均价 5k，公司在 6k 档缺位\n- 用户侧：示例——访谈 12 位用户，8 位提到「首屏加载慢」\n- 内部侧：示例——上一代产品返修率 3.1%，高于目标 1.5%\n\n## 二、产品 / 方案介绍\n\n| 项 | 内容 |\n| - | - |\n| 定位 | 一句话说清卖给谁、解决什么 |\n| 关键规格 | 3–5 条，只写能拿去讲选型判断的 |\n| 与竞品差异 | 2–3 条，写差异不写参数堆砌 |\n\n## 三、我的角色 · 解决的问题 · 结果反馈\n\n**我负责哪一块**：边界写清（需求线 / 方案线 / 跨团队推进）。\n\n**难在哪**：约束是什么（时间 / 成本 / 组织 / 技术）。\n\n**我的判断与取舍**：被否掉的方案也要写，说清否决依据。\n\n**结果**：\n\n| 指标 | 目标 | 实际 |\n| - | - | - |\n| 上线时间 | 2024.06 | 2024.06（准时） |\n| 关键指标 | +20% | +27% |\n| 成本 | ≤ 目标 BOM | 达成 |\n\n**复盘**：失败或延期要归因到具体环节，不揽不推。\n\n---\n\n> 这份是骨架自带的示例文档，正式使用时替换为你自己的深挖内容。"},"P02":{"t":"项目深挖 02 ｜ 示例项目 B（占位）","m":"参与 · 示例角色","md":"# 项目深挖 02 ｜ 示例项目 B\n\n> 归属：XX 科技有限公司 · 某事业部\n> 我的参与周期：2024.07 – 2025.03\n> 我的角色：参与（示例）\n\n---\n\n## 一、项目背景\n\n（占位）\n\n## 二、产品 / 方案介绍\n\n（占位）\n\n## 三、我的角色 · 解决的问题 · 结果反馈\n\n（占位）"}}</script>
+
+<script>
+(function(){
+  var DOCS = JSON.parse(document.getElementById('docdata').textContent);
+  function inline(s){
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  }
+  function md2html(md){
+    var lines = String(md).replace(/\r/g,'').split('\n'), out=[], i=0;
+    function sep(s){ return /^\|[\s:\-|]+\|?\s*$/.test(s) && s.indexOf('-')>-1; }
+    while(i<lines.length){
+      var L=lines[i];
+      if(/^```/.test(L)){ var b=[]; i++;
+        while(i<lines.length && !/^```/.test(lines[i])){b.push(lines[i]);i++;} i++;
+        out.push('<pre class="md-pre">'+b.join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</pre>'); continue; }
+      if(/^\|/.test(L) && i+1<lines.length && sep(lines[i+1])){
+        var head=L.replace(/^\||\|$/g,'').split('|').map(function(x){return x.trim();}); i+=2;
+        var rows=[];
+        while(i<lines.length && /^\|/.test(lines[i])){ rows.push(lines[i].replace(/^\||\|$/g,'').split('|').map(function(x){return x.trim();})); i++; }
+        out.push('<table class="md-tbl"><thead><tr>'+head.map(function(h){return '<th>'+inline(h)+'</th>';}).join('')
+          +'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+head.map(function(_,k){return '<td>'+inline(r[k]||'')+'</td>';}).join('')+'</tr>';}).join('')
+          +'</tbody></table>'); continue;
+      }
+      var h=/^(#{1,6})\s+(.*)$/.exec(L);
+      if(h){ var lv=h[1].length;
+        out.push('<h'+(lv+1)+' class="md-h'+(lv+1)+'">'+inline(h[2])+'</h'+(lv+1)+'>'); i++; continue; }
+      if(/^>\s?/.test(L)){ var q=[];
+        while(i<lines.length && /^>\s?/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/,'')); i++; }
+        out.push('<blockquote class="md-quote">'+q.map(inline).join('<br>')+'</blockquote>'); continue; }
+      if(/^\s*---+\s*$/.test(L)){ out.push('<hr class="md-hr">'); i++; continue; }
+      if(/^\s*([-*+]|\d+\.)\s+/.test(L)){
+        var ord=/^\s*\d+\.\s+/.test(L), items=[];
+        while(i<lines.length && /^\s*([-*+]|\d+\.)\s+/.test(lines[i])){
+          items.push(lines[i].replace(/^\s*([-*+]|\d+\.)\s+/,'')); i++;
+          while(i<lines.length && /^\s{2,}\S/.test(lines[i]) && !/^\s*([-*+]|\d+\.)\s+/.test(lines[i])){
+            items[items.length-1]+=' '+lines[i].trim(); i++; }
+        }
+        var t=ord?'ol':'ul';
+        out.push('<'+t+' class="md-list">'+items.map(function(x){return '<li class="md-li">'+inline(x)+'</li>';}).join('')+'</'+t+'>'); continue;
+      }
+      if(!L.trim()){ i++; continue; }
+      var pb=[L]; i++;
+      while(i<lines.length && lines[i].trim() && !/^(#{1,6}\s|\||>|```|\s*([-*+]|\d+\.)\s|\s*---+\s*$)/.test(lines[i])){ pb.push(lines[i]); i++; }
+      out.push('<p class="md-p">'+inline(pb.join(' '))+'</p>');
+    }
+    return out.join('\n');
+  }
+
+  var mask=document.getElementById('mask'), panel=document.getElementById('panel'),
+      ptitle=document.getElementById('ptitle'), pmeta=document.getElementById('pmeta'),
+      pbody=document.getElementById('pbody');
+  function openDoc(key){
+    var d = DOCS[key]; if(!d){ toast('该项目暂无深挖文档'); return; }
+    var short = String(d.t || '项目深挖').replace(/^项目深挖\s*\d+\s*\uff5c\s*/, '');
+    ptitle.textContent = short;
+    pmeta.textContent = d.m || '';
+    pbody.innerHTML = md2html(d.md);
+    pbody.scrollTop = 0;
+    mask.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDoc(){ mask.classList.remove('on'); document.body.style.overflow=''; }
+  function toast(msg){
+    var t = document.getElementById('v5toast');
+    if(!t){ t=document.createElement('div'); t.id='v5toast';
+      t.style.cssText='position:fixed;left:50%;bottom:74px;transform:translateX(-50%);z-index:9999;background:rgba(31,39,51,.92);color:#fff;font-size:12.5px;padding:8px 18px;border-radius:18px;pointer-events:none;transition:opacity .3s;opacity:0';
+      document.body.appendChild(t); }
+    t.textContent = msg; t.style.opacity = '1';
+    clearTimeout(t._tm); t._tm = setTimeout(function(){ t.style.opacity='0'; }, 1800);
+  }
+  document.getElementById('pclose').addEventListener('click', closeDoc);
+  mask.addEventListener('click', function(e){ if(e.target===mask) closeDoc(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDoc(); });
+  /* 事件委托：点击/触摸任意 [data-key] 横条即触发，绑定永不丢失 */
+  function delegate(e){
+    var el = e.target && e.target.closest ? e.target.closest('[data-key]') : null;
+    if(!el) return;
+    openDoc(el.getAttribute('data-key'));
+  }
+  document.addEventListener('click', delegate, true);
+  document.addEventListener('touchend', function(e){ delegate(e); }, true);
+  /* 运行时报错横幅：若脚本异常，页面顶部会显示红条，便于定位 */
+  window.addEventListener('error', function(ev){
+    var b=document.getElementById('v5err');
+    if(!b){ b=document.createElement('div'); b.id='v5err';
+      b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:10000;background:#B3402F;color:#fff;font-size:12px;padding:6px 14px';
+      document.body.appendChild(b); }
+    b.textContent = '\u26a0 \u9875\u9762\u811a\u672c\u5f02\u5e38\uff1a' + ev.message;
+  });
+  /* 暴露到全局：供条目 inline onclick 兜底调用（环境不信任事件委托时仍可弹层） */
+  window.openDoc = openDoc; window.closeDoc = closeDoc;
+})();
+
+</script>
+<script>
+function setScope(s){
+  document.body.classList.toggle('public', s==='public');
+  document.getElementById('btn-int').classList.toggle('on', s!=='public');
+  document.getElementById('btn-ext').classList.toggle('on', s==='public');
+  try{localStorage.setItem('scope', s)}catch(e){}
+}
+(function(){var s;try{s=localStorage.getItem('scope')}catch(e){}setScope(s||'int')})();
+
+/* ---- 翻书机制 ---- */
+var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+var cur = 0;
+function pageOf(el){
+  while(el && el !== document.body){
+    if(el.classList && el.classList.contains('page')) return pages.indexOf(el);
+    el = el.parentNode;
+  }
+  return -1;
+}
+function go(n){
+  n = Math.max(0, Math.min(pages.length-1, n));
+  if(n === cur && pages[cur].classList.contains('active')) {}
+  pages[cur].classList.remove('active');
+  cur = n;
+  pages[cur].classList.add('active');
+  pages[cur].scrollTop = 0;
+  try{sessionStorage.setItem('pg', cur)}catch(e){}
+  renderBar();
+}
+function gotoId(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var pi = pageOf(el);
+  if(pi >= 0){ go(pi); var r = el.getBoundingClientRect(); if(r.top < 0 || r.top > innerHeight) el.scrollIntoView(); }
+}
+function renderBar(){
+  document.getElementById('pageno').textContent = (cur+1) + ' / ' + pages.length;
+  var pv = document.getElementById('pt-prev'), nx = document.getElementById('pt-next');
+  pv.textContent = cur > 0 ? '← ' + pages[cur-1].getAttribute('data-title') : '—';
+  pv.disabled = cur === 0;
+  nx.textContent = cur < pages.length-1 ? pages[cur+1].getAttribute('data-title') + ' →' : '—';
+  nx.disabled = cur === pages.length-1;
+  var items = document.querySelectorAll('.side-item');
+  for(var i=0;i<items.length;i++){
+    items[i].classList.toggle('on', parseInt(items[i].getAttribute('data-pi'),10) === cur);
+  }
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'ArrowRight' || e.key === 'PageDown') { go(cur+1); e.preventDefault(); }
+  else if(e.key === 'ArrowLeft' || e.key === 'PageUp') { go(cur-1); e.preventDefault(); }
+  else if(e.key === 'Home') go(0);
+  else if(e.key === 'End') go(pages.length-1);
+});
+/* 锚点点击 → 翻到目标所在页 */
+document.addEventListener('click', function(e){
+  var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+  if(!a) return;
+  var id = a.getAttribute('href').slice(1);
+  if(!id) return;
+  var el = document.getElementById(id);
+  if(!el) return;
+  e.preventDefault();
+  gotoId(id);
+});
+/* 初始页：hash > session > 封面 */
+(function(){
+  var start = 0;
+  if(location.hash){
+    var el = document.getElementById(location.hash.slice(1));
+    if(el) start = Math.max(0, pageOf(el));
+  }
+  if(!start){ try{ start = parseInt(sessionStorage.getItem('pg'))||0 }catch(e){} }
+  cur = Math.max(0, Math.min(pages.length-1, start));
+  pages[cur].classList.add('active');
+  renderBar();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "title": "XX 公司工作经历框架",
+  "subtitle": "整机与硬件 8 项 · 软件与平台 4 项 · 点击任一条目查看项目深挖文档",
+  "company": "XX 科技有限公司 2023.09-2026.08",
+  "start": "2023-09",
+  "end": "2026-08",
+  "docsDir": "项目深挖",
+  "out": "工作经历框架.html",
+
+  "width": 1400,
+  "plotLeft": 96,
+  "pxPerK": 74,
+
+  "hardware": [
+    {
+      "key": "P01",
+      "name": "P01 旗舰款",
+      "start": "2024-01",
+      "end": "2025-03",
+      "price": 8,
+      "system": "安卓",
+      "chip": "QCS8250",
+      "owner": true,
+      "color": "#DCEAFB",
+      "doc": "项目深挖-01_P01旗舰款.md"
+    },
+    {
+      "key": "P02",
+      "name": "P02 中端款",
+      "start": "2024-07",
+      "end": "2025-03",
+      "price": 5.5,
+      "system": "Linux",
+      "chip": "hi3519AV200",
+      "owner": true,
+      "color": "#DDEFE6",
+      "doc": [{ "f": "项目深挖-02_P02中端款.md", "l": "02 ｜ P02 中端款" }]
+    },
+    {
+      "key": "P03",
+      "name": "P03 预研未上市",
+      "start": "2024-01",
+      "end": "2024-09",
+      "price": 3.5,
+      "system": "安卓",
+      "chip": "QCS6490",
+      "color": "#F0EDE2",
+      "doc": null
+    }
+  ],
+
+  "software": [
+    {
+      "key": "S01",
+      "name": "S01 上位机平台",
+      "start": "2023-09",
+      "end": "2025-12",
+      "layer": "PC 端上位机",
+      "form": "PC 软件",
+      "owner": true,
+      "color": "#E3E9F8",
+      "doc": "项目深挖-03_S01上位机平台.md"
+    },
+    {
+      "key": "S02",
+      "name": "S02 配套 App",
+      "start": "2025-10",
+      "end": "2026-08",
+      "layer": "移动端 App",
+      "form": "App + iPad 同包",
+      "owner": true,
+      "color": "#EDE6F9",
+      "doc": "项目深挖-04_S02配套App.md"
+    }
+  ],
+
+  "layers": ["PC 端上位机", "移动端 App", "云端 / SaaS", "设备端固件"],
+
+  "noteHardware": "纵轴为价格档，★ 为主责项目。点击项目条查看深挖文档；标「暂无文档」的条目不可点击。",
+  "noteSoftware": "纵轴为软件形态分层，时间轴与上图完全对齐。",
+
+  "foot": [
+    { "k": "文档", "tags": [{ "k": "ok", "v": "每个项目一份三段式深挖 md" }, { "k": "tip", "v": "★＝本人主责" }] },
+    { "k": "口径", "tags": [{ "k": "sys", "v": "时间以真实口径为准" }, { "k": "own", "v": "价格与规格以最终确认为准" }] }
+  ]
+}
